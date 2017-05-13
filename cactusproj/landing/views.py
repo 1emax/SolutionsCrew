@@ -1,6 +1,6 @@
 # from django.conf import settings
 from django.contrib import messages
-# from django.views.generic import TemplateView
+from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse_lazy
@@ -21,3 +21,7 @@ class MainPageView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         messages.success(self.request, _('Problem created successfully'))
         return reverse_lazy('landing:main_page')
+
+
+class MapPageView(LoginRequiredMixin, TemplateView):
+    template_name = 'landing/map_page.html'

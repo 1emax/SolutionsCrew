@@ -52,6 +52,9 @@
                     <li class="{% if request.resolver_match.view_name == 'landing:main_page' %}active{% endif %}">
                         <a href="{% url 'landing:main_page' %}"><i class="fa fa-home"></i> <span class="nav-label">{% trans 'Home' %}</span> </a>
                     </li>
+                    <li class="{% if request.resolver_match.view_name == 'landing:map_page' %}active{% endif %}">
+                        <a href="{% url 'landing:map_page' %}"><i class="fa fa-map"></i> <span class="nav-label">{% trans 'Map' %}</span> </a>
+                    </li>
                     <li class="{% if request.resolver_match.namespace == 'accounts' %}active{% endif %}">
                         <a href="{{ request.user.profile.get_absolute_url }}"><i class="fa fa-user "></i> <span class="nav-label">{% trans 'Account' %}</span></a>
                     </li>
