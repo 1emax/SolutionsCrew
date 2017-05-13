@@ -25,7 +25,7 @@ SECRET_KEY = 'dev_secret_key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', '192.168.99.100']
 
 # Application definition
 
