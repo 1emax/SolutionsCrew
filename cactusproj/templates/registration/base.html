@@ -1,0 +1,38 @@
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ThreatInformantion</title>
+
+    <link href="{% static 'theme/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'theme/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link href="{% static 'theme/css/plugins/toastr/toastr.min.css' %}" rel="stylesheet">
+    <link href="{% static 'theme/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'theme/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    {% block body %}
+    {% endblock body %}
+
+    <!-- Mainly scripts -->
+    <script src="{% static 'theme/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'theme/js/bootstrap.min.js' %}"></script>
+    <!-- Toastr script -->
+    <script src="{% static 'theme/js/plugins/toastr/toastr.min.js' %}"></script>
+    {% block additional_scripts %}
+    {% endblock additional_scripts %}
+</body>
+
+</html>

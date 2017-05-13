@@ -1,0 +1,44 @@
+{% extends 'registration/base.html' %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block body %}
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">TI</h1>
+
+            </div>
+            <h3>Welcome to Threat Informant</h3>
+            <p>Threat Intelligence - Professional Services - Advanced Threat Analysis</p>
+            <p>Login in. To see it in action.</p>
+            <form class="m-t" role="form" method="post">
+            {% csrf_token %}
+                <div class="form-group">
+                    {% render_field form.username class+="form-control" placeholder='Username or email' %}
+                </div>
+                <div class="form-group">
+                    {% render_field form.password class+="form-control" placeholder=form.password.label %}
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                {# <a href="#"><small>Forgot password?</small></a> #}
+                {# <p class="text-muted text-center"><small>Do not have an account?</small></p> #}
+                {# <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a> #}
+            </form>
+            <p class="m-t"> <small>Threat Informant &copy; 2017</small> </p>
+        </div>
+    </div>
+{% endblock body %}
+
+
+
+{% block additional_scripts %}
+{% if form.errors %}
+<script type="text/javascript">
+    toastr["warning"]("{% trans 'Please check username or/and password for errors' %}")
+</script>
+{% endif %}
+{% endblock additional_scripts %}

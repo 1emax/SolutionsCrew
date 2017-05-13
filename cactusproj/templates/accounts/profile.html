@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load breadcrumbs %}
+
+
+{% block title %}
+    {{ block.super }} | {{ profile.user.get_full_name }}
+{% endblock %}
+
+
+{% block breadcrumb %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Profile</h2>
+        <ol class="breadcrumb">
+            <li class="">
+                {% breadcrumb_url "Home" 'landing:main_page' %}
+            </li>
+            <li class="active">
+               <strong>{{ request.user.get_full_name }}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+
+{% block body %}
+<div class="row m-b-lg m-t-lg">
+
+    <div class="btn-group pull-right"><a class="btn btn-w-m btn-success" href="{% url 'accounts:profile_update' request.user.profile.slug %}" type="button">Edit <span class=""><i class="fa fa-cog"></i></span></a></div>
+
+    <div class="col-md-2">
+        <div class="">
+            <img src="{{ profile.get_avatar_sm }}" class="img-circle circle-border m-b-md" alt="profile">
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="ibox-content">
+            <div class="">
+                <div>
+                    <h2 class="no-margins">
+                        {{ profile.user.get_full_name }}
+                    </h2>
+                    <br>
+                <address>
+                    <strong>{{ profile.user.username|default_if_none:"-" }}</strong>
+                    <br> {{ profile.address_line1|default_if_none:"-" }}
+                    <br> {{ profile.address_line2|default_if_none:"-" }}
+                    <br> {{ profile.city|default_if_none:"-" }}
+                    <br> {{ profile.state.name|default_if_none:"-" }}
+                    <br> {{ profile.postal|default_if_none:"-" }}
+                    <br> {{ profile.dob|default_if_none:"-" }}
+                    <br>
+                    <abbr title="Phone">P:</abbr> {{ profile.phone|default_if_none:"-" }}
+                    <br>
+                    <abbr title="Cell Phone">Mobile:</abbr> {{ profile.cell|default_if_none:"-" }}
+                </address>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock body %}

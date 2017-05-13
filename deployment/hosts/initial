@@ -1,0 +1,12 @@
+[development]
+178.62.216.26
+
+[development:vars]
+vm=0
+nickname=production
+ansible_ssh_port=22
+ansible_ssh_user="root"
+branch=master
+server_port=80
+server_hostname=178.62.216.26
+process_bind=127.0.0.1:8000

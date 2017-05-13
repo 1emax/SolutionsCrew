@@ -1,0 +1,7 @@
+project_group: webapps
+project_name: cactusproj
+remote_host: bitbucket.org
+project_database: db_name_cactusproject
+project_root: /var/webapps/cactusproj
+project_repo: git@bitbucket.org:cactushack/cactushack.git
+project_database_user: db_user_cactusproject
