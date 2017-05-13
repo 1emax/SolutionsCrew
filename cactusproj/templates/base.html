@@ -41,8 +41,8 @@
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="{{ request.user.profile.get_absolute_url }}">{% trans 'Profile' %}</a></li>
-                                <li><a href="{% url 'auth_password_change' %}">{% trans 'Change Password' %}</a></li>
-                                <li><a href="{% url 'auth_logout' %}">{% trans 'Logout' %}</a></li>
+                                <li><a href="">{% trans 'Change Password' %}</a></li>
+                                <li><a href="">{% trans 'Logout' %}</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -71,7 +71,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <a href="{% url 'auth_logout' %}">
+                            <a href="{% url 'accounts:logout' %}">
                                 <i class="fa fa-sign-out"></i> {% trans 'Log out' %}
                             </a>
                         </li>

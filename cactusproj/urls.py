@@ -6,8 +6,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^', include('cactusproj.landing.urls', namespace='landing')),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^accounts/', include('cactusproj.accounts.urls', namespace='accounts')),
-    url(r'^auth/', include('cactusproj.registration.backends.default.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),

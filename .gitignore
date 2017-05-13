@@ -16,7 +16,12 @@
 ###############
 logs/
 .idea/
-.vagrant/
+cactusproj/media
+cactusproj/static/django_extensions/
+cactusproj/static/flags/
+cactusproj/static/grappelli/
+cactusproj/static/rest_framework/
+cactusproj/static/admin/
 
 # Specific files #
 ##################
