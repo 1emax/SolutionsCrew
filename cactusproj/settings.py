@@ -25,7 +25,7 @@ SECRET_KEY = 'dev_secret_key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -94,12 +94,12 @@ WSGI_APPLICATION = 'cactusproj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_name_cactusproject',
-        'USER': 'db_user_cactusproject',
-        'PASSWORD': 'db_secret_pass',
-        'HOST': '127.0.0.1',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
     }
-}
+} 
 
 
 # Password validation
@@ -148,7 +148,7 @@ STATICFILES_DIRS = [
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'LOCATION': 'redis://redis:6379/1',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -171,11 +171,12 @@ LOGIN_REDIRECT_URL = "landing:main_page"
 LOGIN_URL = "auth_login"    # it will be lazy urlresolved than
 
 # CELERY SETTINGS
-BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+
 
 # Crispy Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
