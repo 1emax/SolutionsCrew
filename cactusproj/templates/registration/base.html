@@ -18,10 +18,11 @@
     <link href="{% static 'theme/css/plugins/toastr/toastr.min.css' %}" rel="stylesheet">
     <link href="{% static 'theme/css/animate.css' %}" rel="stylesheet">
     <link href="{% static 'theme/css/style.css' %}" rel="stylesheet">
-
+    {% block css %}
+    {% endblock css %}
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg" style="background-size: 100%;background-repeat: no-repeat;background-image: url(/static/backgrounds/blur2.jpeg);">
 
     {% block body %}
     {% endblock body %}

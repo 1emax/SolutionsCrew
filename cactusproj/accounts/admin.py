@@ -31,5 +31,5 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ['user__username']
     fields = ['user', 'admin_image_thumb', 'profile_image', 'sex', 'slug', 'address_line1',
               'address_line2', 'city', 'state', 'postal', 'dob', 'phone', 'cell',
-              'created_date', 'modified_date']
+              'created_date', 'modified_date', 'points', 'level']
     readonly_fields = ['admin_image_thumb', 'created_date', 'modified_date']

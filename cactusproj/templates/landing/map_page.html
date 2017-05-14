@@ -1,8 +1,142 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %} 
+
+
+{% block head_extra_css %}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe2qGs5M6DiIFZY4f6yIlxy8kVHwGfTHA"></script>    
+<!-- form Uploads -->
+<link href="{% static 'style.css' %}" rel="stylesheet">
+{% endblock head_extra_css %}
 
 
 {% block body %}
-opa here 
+{% csrf_token %}
+<div class="row m-b-lg">
+        <div id="main-map"></div>
+        <div class="items-div">
+            <h2>Points list</h2>
+            <div class="list">
+                {% for problem in problems %}
+                <div class="item">
+                    <img src="{{ problem.image_xs.url }}" style="border-radius: 50%;">
+                    <div>
+                        <a href="{{ problem.get_absolute_url }}">{{ problem.name }}</a>
+                    </div>
+                    <div>
+                        {{ problem.upload_date|naturalday }}
+                    </div>
+                    <div class="social-net">
+                        <img src="{% static 'multimedia.png' %}">
+                        {% if problem in request.user.profile.show_liked_problems  %}
+                        <img class="like_or_unlike_fund" data-id={{ problem.id }} src="{% static 'shapesdark.png' %}">
+                        {% else %}
+                        <img class="like_or_unlike_fund" data-id={{ problem.id }} src="{% static 'shapes.png' %}">
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+</div>
 {% endblock body %}
+
+
+
+{% block extra_script_base %}
+<script src="{% static 'show.js' %}"></script>
+{% endblock extra_script_base %}
+
+
+
+{% block page_script_base %}
+
+    <script>
+
+var likes=document.getElementsByClassName('like');
+for(var i=0;i<likes.length;i++){
+    likes[i].addEventListener('click',function () {
+        var name=this.src.split('/');
+        if(name[name.length-1]==='shapesdark.png'){
+            this.src='shapes.png';
+        }else{
+            this.src='shapesdark.png';
+        }
+    });
+}
+function initMap() {
+    var centerLatLng = new google.maps.LatLng(59.2650709, 30.2522799);
+    var mapOptions = {
+        center: centerLatLng,
+        zoom: 11
+    };
+    var map = new google.maps.Map(document.getElementById("main-map"), mapOptions);
+
+    {% for problem in problems %}
+        var marker{{ forloop.counter }} = new google.maps.Marker({
+          position: {{ problem.location }},
+          map: map,
+          title: '{{ problem.name }}'
+        });
+    {% endfor %}
+
+}
+google.maps.event.addDomListener(window, "load", initMap);
+
+    </script>
+
+
+<!-- file uploads js -->
+<script src="{% static 'theme/css/plugins/fileuploads/js/dropify.min.js' %}"></script>
+<script type="text/javascript">
+var csrf = $("[name='csrfmiddlewaretoken']").val();
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove': 'Remove',
+            'error': 'Ooops, something wrong appended.'
+        },
+        error: {
+            'fileSize': 'The file size is too big (1M max).'
+        }
+    });
+
+function setLikes(){
+    $(".like_or_unlike_fund").click(function(e){
+        e.preventDefault();
+        // checking if like or dislike
+        like_button = $(this);
+        // if need like
+        if (like_button.attr('src') == "/static/shapes.png"){
+            type_send = "PUT";
+        // if need dislike
+        } else if (like_button.attr('src') == "/static/shapesdark.png"){
+            type_send = "DELETE";
+        }
+        $.ajax({
+            type: type_send,
+            url: "{% url 'account-api:likedproblem_change' %}",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-CSRFToken", csrf);
+            },
+            data: {"problem_id":like_button.attr("data-id")},
+            success: function (data) {
+                if (data=='successfully liked problem'){
+                    like_button.attr("src", "/static/shapesdark.png");
+                } else if (data=='successfully unliked problem'){
+                    // like_button.removeClass("fa-heart");
+                    // like_button.addClass("fa-heart-o");
+                    like_button.attr("src", "/static/shapes.png");
+                } else {
+                    toastr["warning"]("some errors, contact admin");
+                }
+            }
+        });
+    })
+};
+setLikes();
+</script>
+{% endblock page_script_base %}

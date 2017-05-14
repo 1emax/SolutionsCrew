@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Problem, Institution, InstitutionProblem
+from .models import Problem, Institution, InstitutionProblem, SocialGroup
 
 
 @admin.register(Problem)
@@ -16,3 +16,8 @@ class InstitutionAdmin(admin.ModelAdmin):
 @admin.register(InstitutionProblem)
 class InstitutionProblemAdmin(admin.ModelAdmin):
     list_display = ['status']
+
+
+@admin.register(SocialGroup)
+class SocialGroupAdmin(admin.ModelAdmin):
+    list_display = ['name']

@@ -45,16 +45,22 @@
                     <h2 class="no-margins">
                         {{ profile.user.get_full_name }}
                     </h2>
-                    <br>
+                    <style>
+                         span {
+                            color :#3E7493;
+                             }
+                    </style>
                 <address>
-                    <strong>{{ profile.user.username|default_if_none:"-" }}</strong>
-                    <br> {{ profile.address_line1|default_if_none:"-" }}
-                    <br> {{ profile.address_line2|default_if_none:"-" }}
-                    <br> {{ profile.city|default_if_none:"-" }}
-                    <br> {{ profile.state.name|default_if_none:"-" }}
-                    <br> {{ profile.postal|default_if_none:"-" }}
-                    <br> {{ profile.dob|default_if_none:"-" }}
-                    <br>
+                <h2>
+                     points: <span> {{ profile.points }}</span>
+                </h2>
+                   <h2>
+                       login: <span>{{ profile.user.username|default_if_none:"-" }}</span>
+                   </h2>
+                   <h2>
+                       level: <span>{{ profile.level|default_if_none:"-" }}</span>
+                   </h2>
+                   
                     <abbr title="Phone">P:</abbr> {{ profile.phone|default_if_none:"-" }}
                     <br>
                     <abbr title="Cell Phone">Mobile:</abbr> {{ profile.cell|default_if_none:"-" }}

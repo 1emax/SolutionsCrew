@@ -1,0 +1,14 @@
+{% load humanize %}
+
+
+
+{% for message in messages %}
+<div class="chat-message {% if message.sender == request.user %} right {%else%} left {% endif %}">
+    <img class="message-avatar" src="{{ message.sender.profile.profile_image_thumbnail_sm.url }}" alt="" >
+    <div class="message">
+        <a class="message-author" href="#"> {{ message.sender }}</a>
+        <span class="message-date"> {{ message.created_at|naturaltime }} </span>
+        <span class="message-content">{{ message.message }}</span>
+    </div>
+</div>
+{% endfor %}

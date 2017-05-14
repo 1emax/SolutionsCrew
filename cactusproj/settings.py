@@ -6,7 +6,7 @@ SECRET_KEY = 'dev_secret_key'
 DEBUG = True
 SOCIAL_PROD = False
 
-ALLOWED_HOSTS = ['localhost', '10.55.28.66', '192.168.99.100']
+ALLOWED_HOSTS = ['localhost', '10.55.28.66', '192.168.99.100', '188.166.7.106']
 
 # Application definition
 INSTALLED_APPS = [
@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.humanize',
     # third party apps
     'social_django',
     'crispy_forms',
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'cactusproj.accounts',
     'cactusproj.landing',
     'cactusproj.utils',
+    'cactusproj.chat',
     'cactusproj.core',
 ]
 
