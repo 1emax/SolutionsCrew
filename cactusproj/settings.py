@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.humanize',
     # third party apps
     'social_django',
     'crispy_forms',
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'cactusproj.accounts',
     'cactusproj.landing',
     'cactusproj.utils',
+    'cactusproj.chat',
     'cactusproj.core',
 ]
 

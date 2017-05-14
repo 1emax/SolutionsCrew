@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% load i18n %}
+
+
+{% block body %}
+
+<div class="row">
+    <div class="col-xs-12 col-md-11 col-lg-10 chat_container">
+        <div class="chat-discussion" id="billboard">
+            {% for message in messages %}
+            <div class="chat-message {% if message.sender == request.user %} right {%else%} left {% endif %}">
+                <img class="message-avatar" src="{{ message.sender.profile.profile_image_thumbnail_sm.url }}" alt="" >
+                <div class="message">
+                    <a class="message-author" href="#"> {{ message.sender }}</a>
+                    <span class="message-date"> {{ message.created_at|naturaltime }}  </span>
+                    <span class="message-content">{{ message.message }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <form action="" id="send_form_id" name="send_form" method="POST">{% csrf_token %}
+            <div class="input-group m-t-10">
+                <input id="id_message" maxlength="200" autocomplete="off" name="message" class="form-control" placeholder=" {{ receiver.get_full_name }}">
+                <span class="input-group-btn">
+               <input class="btn btn-primary" type="submit" value='Send'>
+            </span>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock body %}
+
+
+{% block page_script_base %}
+    {{ block.super }}
+    <script type="text/javascript">
+        var messageField = document.getElementById('id_message');
+        var billboard = $('#billboard');
+        messageField.focus();
+        jQuery(document).submit(function (e) {
+            var form = jQuery(e.target);
+            if (form.is("form[name='send_form']")) {
+                e.preventDefault();
+                jQuery.ajax({
+                    type: "POST",
+                    url: form.attr("action"),
+                    data: form.serialize() + "&" + $.param({ receiver: {{ receiver.id }} }),
+                    success: function (data) {
+                        refresh_messages();
+                        messageField.value = '';
+                        messageField.focus();
+                    }
+                });
+            }
+        });
+        $("#id_message").keydown(function(event) {
+            if (event.keyCode === 13) {
+            }
+        });
+
+    function refresh_messages(){
+        form = $('form[name="send_form"]');
+        csrf = form.find("input[name='csrfmiddlewaretoken']").val();
+        $.ajax({
+            type: "POST",
+            url: '',
+            data: {"csrfmiddlewaretoken":csrf},
+            success: function (data) {
+                billboard.html(data);
+               // billboard.scrollTop(billboard.scrollTop() + 25);
+            }
+        });
+    }
+    window.setInterval(function(){
+        refresh_messages();
+    }, 5000);
+    </script>
+{% endblock page_script_base %}

@@ -1,7 +1,8 @@
 from django.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from imagekit.processors import Adjust, ResizeToFill
-from imagekit.models import ProcessedImageField
+from imagekit.models import ProcessedImageField, ImageSpecField
 from django.utils.translation import ugettext_lazy as _
 from cactusproj.utils.model_utils import UploadToPathAndRename
 
@@ -55,6 +56,16 @@ class Problem(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('landing:problem_detail', kwargs={'pk': self.id})
+
+    image_xs = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(32, 32)],
+        format='JPEG',
+        options={'quality': 80}
+    )
 
 
 class Institution(models.Model):
