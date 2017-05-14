@@ -7,12 +7,21 @@
 
 
 {% block body %}
-
+<style>
+    #dialog-item.subject{
+        width: 400px;
+        display:inline-block;
+    }
+    #dialog-item.date{
+        float: right;
+        width:50px;
+    }
+</style>
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox chat-view">
             <div class="ibox-title">
-                <small class="pull-right text-muted">Last message:  Mon Jan 26 2015 - 18:39:23</small>
+                <small class="pull-right text-muted">Last message:  Sun May 14 2017 - 16:39:23</small>
                 Chat room panel
             </div>
                 <ul class="message-list chat-users">
@@ -22,17 +31,17 @@
                         </center>
                     {% endif %}
                     {% for thread in threads %}
-                        <li class="unread chat-user" style="list-style-type: none;min-height: 70px;" onclick="location.href='{% url 'chat:personal_chat' thread.0.profile.slug %}';">
-                            <div class="col col-sm-11 col-sm-offset-1 " style="margin-left: 0px;">
+                        <li class="unread chat-user" style="list-style-type: none;background: #DDE4E9;min-height: 70px;margin-top:10px;cursor:pointer;" onclick="location.href='{% url 'chat:personal_chat' thread.0.profile.slug %}';">
+                            <div id="dialog-item" class="col col-sm-11 col-sm-offset-1 " style="margin-left: 0px;margin-top:10px">
                                 <!--<span class="dot" style="margin-left: -9px;"></span>-->
                                 <!--<div class="ti-comment-alt" style="margin-top: 15px;margin-right: 10px;">-->
                                 <!--</div>-->
                                 <img class="chat-avatar" src="{{ thread.0.profile.profile_image_thumbnail_sm.url }}" alt="" >
-                                <div class="chat-user-name"> {{ thread.0|truncatechars:30 }} </div>
-                                <!--<div class="subject">{{ thread.1|truncatechars:90 }}</div>-->
+                                <div style="width: 200px; display:inline-block;" class="chat-user-name"> {{ thread.0|truncatechars:30 }} </div>
+                                <div style="width: 400px; display:inline-block;" class=" subject">{{ thread.1|truncatechars:90 }}</div>
 
 
-                                <div class="date">{{ thread.2|date:'H:i' }}</div>
+                                <div style="margin-top:10px;float:right;width:50px;" class="date">{{ thread.2|date:'H:i' }}</div>
                             </div>
                         </li>
                     {% endfor %}
