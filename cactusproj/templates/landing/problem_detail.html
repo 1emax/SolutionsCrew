@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+
+{% block head_page_style %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe2qGs5M6DiIFZY4f6yIlxy8kVHwGfTHA"></script>
+<link href="{% static 'style.css' %}" rel="stylesheet" type="text/css">
+{% endblock head_page_style %}
+
+
+{% block body %}
+    <main class="details" >
+        <div id="main-img">
+            <img src="{{ object.image.url }}">
+        </div>
+
+        <div id="map" class="map">
+
+        </div>
+        <div class="info">
+            <h1 id="name">{{ object.name }}</h1>
+            <p id="date">{{ object.upload_date|naturaltime }}</p>
+            <p id="description">
+                {{ object.description }}
+            </p>
+        </div>
+    </main>
+
+
+
+{% endblock body %}
+
+
+{% block page_script_base %}
+<script src="{% static 'detailed.js' %}"></script>
+{% endblock page_script_base %}

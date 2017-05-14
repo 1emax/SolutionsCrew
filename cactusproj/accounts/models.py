@@ -30,6 +30,7 @@ class Profile(models.Model):
     state = CountryField(blank=True, null=True, blank_label=_('(select country)'))
     postal = models.CharField(_("postal"), max_length=200, blank=True, null=True)
     dob = models.DateField(null=True, blank=True, verbose_name=_('birthday'))
+    points = models.IntegerField(default=0)
     phone = models.CharField(
         max_length=50,
         verbose_name=_("phone"),

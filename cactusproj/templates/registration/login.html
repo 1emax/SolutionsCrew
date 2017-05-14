@@ -3,6 +3,11 @@
 {% load static %}
 {% load widget_tweaks %}
 
+
+{% block css %}
+<link href="{% static 'plugins/bootstrap-social-gh-pages/bootstrap-social.css' %}" rel="stylesheet">
+{% endblock css %}
+
 {% block body %}
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
@@ -28,7 +33,7 @@
                   </div>
                  </div>
               </div>
-            <p class="m-t"> <small>CityLight &copy; 2017</small> </p>
+            <p class="m-t" style="color: #f9f9f9;"> <small>CityLight &copy; 2017</small> </p>
         </div>
     </div>
 {% endblock body %}

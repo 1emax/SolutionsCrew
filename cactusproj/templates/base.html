@@ -16,7 +16,6 @@
     <link href="{% static 'theme/css/plugins/toastr/toastr.min.css' %}" rel="stylesheet">
     <link href="{% static 'theme/css/animate.css' %}" rel="stylesheet">
     <link href="{% static 'theme/css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'theme/css/map2.css' %}" rel="stylesheet">
     {% block head_page_script %}
     {% endblock head_page_script%}
     {% block head_page_style %}
@@ -47,11 +46,14 @@
                             </ul>
                         </div>
                         <div class="logo-element">
-                            TI+
+                            CL
                         </div>
                     </li>
                     <li class="{% if request.resolver_match.view_name == 'landing:main_page' %}active{% endif %}">
                         <a href="{% url 'landing:main_page' %}"><i class="fa fa-home"></i> <span class="nav-label">{% trans 'Home' %}</span> </a>
+                    </li>
+                    <li class="{% if request.resolver_match.namespace == 'chat' %}active{% endif %}">
+                        <a href="{% url 'chat:chat_overview' %}"><i class="fa fa-facebook"></i> <span class="nav-label">{% trans 'Chat' %}</span> </a>
                     </li>
                     <li class="{% if request.resolver_match.view_name == 'landing:map_page' %}active{% endif %}">
                         <a href="{% url 'landing:map_page' %}"><i class="fa fa-map"></i> <span class="nav-label">{% trans 'Map' %}</span> </a>
@@ -82,19 +84,6 @@
                     </ul>
                 </nav>
             </div>
-
-            {% block breadcrumb %}
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-9">
-                    <h2>Welcome</h2>
-                    <ol class="breadcrumb">
-                        <li class="active">
-                            <a href="{% url 'landing:main_page' %}">Home</a>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            {% endblock breadcrumb %}
 
             <div class="wrapper wrapper-content animated fadeInRight">
                 {% block body %}

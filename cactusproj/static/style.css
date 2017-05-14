@@ -1,0 +1,148 @@
+@import url(http://allfont.ru/allfont.css?fonts=roboto-bold);
+
+.item {
+    padding: 7px;
+    border-radius: 30px;
+    background: #DDE4E9;
+    width: 80%;
+    height: 62px;
+    margin: 5px auto;
+}
+
+main {
+    margin: 0 auto;
+    width: 1024px;
+}
+
+.wrapper {
+    height: 100%;
+}
+
+#send {
+    font-family: Roboto BOLD;
+    margin-left: 412px;
+    margin-bottom: 50px;
+    width: 200px;
+    height: 60px;
+    font-size: 1.4em;
+    background: none;
+    border: 2px solid #435966;
+    transition: 0.2s;
+}
+
+#send:hover {
+    color: white;
+    background: #435966;
+    border-radius: 30px;
+}
+
+.items-div h2 {
+    font-family: "Roboto-bold";
+    text-align: center;
+}
+
+.item div {
+    height: 50px;
+    display: inline-block;
+}
+
+.item img {
+    margin-top: 1.25px;
+    margin-left: 2.5px;
+    vertical-align: middle;
+    border: none;
+    height: 45px;
+    width: 45px;
+}
+
+.item img:hover {
+    transform: scale(1.1, 1.1);
+}
+
+.item div:nth-child(3) {
+    width: 100px;
+    text-align: center;
+}
+
+.item div:nth-child(2) {
+    text-align: center;
+    width: 200px;
+}
+
+.social-net {
+    float: right;
+}
+
+.social-net img {
+    height: 30px;
+    width: 30px;
+    margin: 10px 10px;
+}
+
+.social-net img:hover {
+    cursor: pointer;
+    transform: scale(1.15, 1.15)
+
+}
+
+/*detailed-information*/
+.info {
+
+    width: 400px;
+}
+
+#main-img {
+    vertical-align: top;
+    display: inline-block;
+    border: 1px solid black;
+    width: 400px;
+    height: 400px;
+}
+
+.border {
+    border: 1px solid black;
+}
+
+.info {
+
+    float: left;
+    vertical-align: top;
+    width: 400px;
+    display: inline-block;
+    font-size: 2em;
+    text-align: center;
+}
+
+#name {
+    margin-bottom: 0px;
+}
+
+#description {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+#main-img img {
+    width: 100%;
+    height: 100%;
+}
+
+#main-map {
+    margin: 0 auto;
+        width: 800px;
+    height: 400px;
+}
+
+.info p {
+    font-size: 0.7em;
+    margin-top: 0;
+}
+
+.map {
+    float: right;
+    padding: 0;
+    margin: 0px;
+    display: inline-block;
+    width: 600px;
+    height: 600px;
+}
