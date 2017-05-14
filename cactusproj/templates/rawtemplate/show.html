@@ -6,6 +6,8 @@
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
     <meta name="author" content="Coderthemes">
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe2qGs5M6DiIFZY4f6yIlxy8kVHwGfTHA"></script>
+
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
     <title>Adminto - Responsive Admin Dashboard Template</title>
@@ -62,6 +64,7 @@
 </header>
 <div class="wrapper">
     <main>
+        <div id="main-map"></div>
         <div class="items-div">
             <h2>Points list</h2>
             <div class="list">
@@ -75,15 +78,18 @@
                     </div>
                     <div class="social-net">
                         <img src="multimedia.png">
-                        <img src="shapes.png">
+                        <img class="like" src="shapes.png">
                     </div>
                 </div>
+
             </div>
         </div>
     </main>
 
 
 </div>
+
+<script src="js/show.js"></script>
 <!-- jQuery  -->
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
@@ -116,6 +122,5 @@
         }
     });
 </script>
-
 </body>
 </html>
