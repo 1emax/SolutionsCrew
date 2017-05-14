@@ -1,0 +1,81 @@
+version: '2.1'
+
+services:
+  db:
+    # restart: always
+    image: postgres:latest
+    container_name: pq01
+    healthcheck:
+      test: "pg_isready -h localhost -p 5432 -q -U postgres"
+      interval: 3s
+      timeout: 5s
+      retries: 5
+    expose:
+     - "5432"
+
+  web:
+    # restart: always
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    expose:
+      - "8000"
+    container_name: dg01
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    links:
+      - redis
+      - db
+    volumes:
+      - ./:/webapps/code
+      - ./cactusproj/static:/webapps/www/static
+      - ./cactusproj/media:/webapps/www/media
+    command: bash -c 'python manage.py makemigrations && python manage.py migrate && gunicorn cactusproj.wsgi -b :8000'
+
+
+  nginx:
+    # restart: always
+    image: nginx:latest
+    container_name: nx01
+    ports:
+      - "80:80"
+    depends_on:
+      web:
+        condition: service_started
+    volumes_from:
+      - web
+    volumes:
+      - ./compose/nginx:/etc/nginx/conf.d
+    links:
+      - web
+
+
+  redis:
+    # restart: always
+    image: redis:latest
+    container_name: rd01
+    healthcheck:
+      test: "redis-cli ping"
+      interval: 3s
+      timeout: 5s
+      retries: 5
+    expose:
+     - '6379'
+
+  celery:
+    # restart: always
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    container_name: cl01
+    # volumes:                  # only for my development delete it
+    #     - ~/.ssh:/root/.ssh   # only for my development delete it
+    links:
+      - db
+      - redis
+    volumes_from:
+      - web
+    command: celery --purge -n celery_worker --app=cactusproj.celery:app worker --loglevel=INFO

@@ -1,0 +1,49 @@
+{% extends 'registration/base.html' %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block css %}
+<link href="{% static 'plugins/bootstrap-social-gh-pages/bootstrap-social.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block body %}
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">CL</h1>
+
+            </div>
+            <h3>Welcome to CityLight</h3>
+            <p>City Light is a place where we can make world a better place</p>
+            <p>Login in. To see it in action.</p>
+              <div class="middle-box text-center loginscreen animated fadeInDown">
+                 <div class="ibox" style="box-shadow: 1px 0px 1px 1px rgba(0,0,0,.1);">
+                 <div class="ibox-content">
+                      <a style="margin-bottom: 8px;" href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-social btn-facebook">
+                        <span class="fa fa-facebook"></span>
+                        Sign in with Facebook
+                      </a>
+                      <a href="{% url 'social:begin' 'vk-oauth2' %}" class="btn btn-block btn-social btn-vk">
+                        <span class="fa fa-vk"></span>
+                        Sign in with Vk
+                      </a>
+                  </div>
+                 </div>
+              </div>
+            <p class="m-t" style="color: #f9f9f9;"> <small>CityLight &copy; 2017</small> </p>
+        </div>
+    </div>
+{% endblock body %}
+
+
+
+{% block additional_scripts %}
+{% if form.errors %}
+<script type="text/javascript">
+    toastr["warning"]("{% trans 'Please check username or/and password for errors' %}")
+</script>
+{% endif %}
+{% endblock additional_scripts %}
