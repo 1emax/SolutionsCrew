@@ -1,0 +1,82 @@
+@import url(http://allfont.ru/allfont.css?fonts=roboto-bold);
+
+.item {
+    padding: 7px;
+    border-radius: 30px;
+    background: #DDE4E9;
+    width: 80%;
+    height: 62px;
+    margin: 5px auto;
+}
+main{
+    margin: 0 auto;
+    width: 1024px;
+}
+.items-div {
+
+}
+
+.wrapper {
+    height: 100%;
+}
+
+#send {
+    font-family:Roboto BOLD;
+    margin-left: 412px;
+    margin-bottom: 50px;
+    width: 200px;
+    height: 60px;
+    font-size: 1.4em;
+    background: none;
+    border: 2px solid #435966;
+    transition: 0.2s;
+}
+
+#send:hover {
+    color: white;
+    background: #435966;
+    border-radius: 30px;
+}
+
+.items-div h2 {
+    font-family: "Roboto-bold";
+    text-align: center;
+}
+
+
+.item div {
+    height: 50px;
+    display: inline-block;
+}
+
+.item img {
+    margin-top: 1.25px;
+    margin-left: 2.5px;
+    vertical-align: middle;
+    border: none;
+    height: 45px;
+    width: 45px;
+}
+
+.item div:nth-child(3) {
+    width: 100px;
+    text-align: center;
+}
+.item div:nth-child(2) {
+    text-align: center;
+    width: 200px;
+}
+.social-net{
+    float: right;
+}
+.social-net img{
+    height: 30px;
+    width: 30px;
+    margin: 10px 10px;
+}
+/*detailed-information*/
+#main-img{
+    border: 1px solid black;
+    width: 300px;
+    height: 300px;
+}
