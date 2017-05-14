@@ -11,7 +11,7 @@ class ProblemCreateForm(forms.ModelForm):
         fields = (
             'name',
             'image',
-            'description',
+            # 'description',
             'location',
             'upload_date',
         )
