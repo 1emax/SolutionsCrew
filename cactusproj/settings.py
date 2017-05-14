@@ -4,7 +4,7 @@ BASE_DIR = os.path.dirname(__file__)
 
 SECRET_KEY = 'dev_secret_key'
 DEBUG = True
-SOCIAL_PROD = True
+SOCIAL_PROD = False
 
 ALLOWED_HOSTS = ['localhost', '10.55.28.66', '192.168.99.100', '188.166.7.106']
 
