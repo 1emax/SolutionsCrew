@@ -6,6 +6,11 @@ from django.utils.translation import ugettext_lazy as _
 from cactusproj.utils.model_utils import UploadToPathAndRename
 
 
+class ProblemQuerySet(models.QuerySet):
+    def active(self):
+        return self.filter(status=1)
+
+
 class Problem(models.Model):
     '''
         Here is problem models in which we will be storing all city problems
@@ -45,6 +50,8 @@ class Problem(models.Model):
 
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
+
+    objects = ProblemQuerySet.as_manager()
 
     def __str__(self):
         return self.name

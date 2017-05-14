@@ -4,5 +4,7 @@
 
 
 {% block body %}
-opa here 
+{% for problem in problems %}
+    {{ problem }}
+{% endfor %}
 {% endblock body %}
