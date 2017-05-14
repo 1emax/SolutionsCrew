@@ -9,9 +9,9 @@ class ProblemCreateForm(forms.ModelForm):
         model = Problem
 
         fields = (
-            'name',
+            # 'name',
             'image',
             # 'description',
-            'location',
-            'upload_date',
+            # 'location',
+            # 'upload_date',
         )

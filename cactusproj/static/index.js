@@ -1,6 +1,6 @@
 
 function handleFiles() {
-    var filesToUpload = document.getElementById('img-to-add').files;
+    var filesToUpload = document.getElementById('id_image').files;
     var file = filesToUpload[0];
     EXIF.getData(file, function() {
         var allMetaData = EXIF.getAllTags(this);

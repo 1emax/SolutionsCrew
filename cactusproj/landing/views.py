@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.views.generic import TemplateView
+import math
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from django.utils.translation import ugettext as _
@@ -17,6 +18,12 @@ class MainPageView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form, **kwargs):
         form.instance.author = self.request.user
+        form.instance.description = 'description blah'
+        form.instance.location = 'location'
+        # adding points to user
+        self.request.user.profile.points += 2
+        self.request.user.profile.level = int(math.log(self.request.user.profile.points, 2))
+        self.request.user.save()
         return super(MainPageView, self).form_valid(form)
 
     def get_success_url(self):
@@ -31,7 +38,6 @@ class MapPageView(LoginRequiredMixin, TemplateView):
         context = super(MapPageView, self).get_context_data(**kwargs)
         context['problems'] = Problem.objects.active()
         return context
-
 
 
 class ProblemDetailView(LoginRequiredMixin, DetailView):

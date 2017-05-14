@@ -15,16 +15,19 @@
 <div class="container">
   <main>
       <div class="row">
-          <div class="col-sm-12">
-              <div class="card-box">
-                  <h4 class="header-title m-t-0 m-b-30">Problem Init</h4>
+          <form accept="" id='send_me' enctype='multipart/form-data' method="POST">
+            <div class="col-sm-12">
+                <div class="card-box">
+                {% csrf_token %}
+                    <h4 class="header-title m-t-0 m-b-30">Problem Init</h4>
 
-                  <input id="img-to-add"  onchange="handleFiles()" type="file" class="dropify" data-height="300"/>
-              </div>
-          </div><!-- end col -->
+                    <input id="id_image" name="image" onchange="handleFiles()" type="file" class="dropify" data-height="300"/>
+                </div>
+            </div><!-- end col -->
+          </form>
       </div>
       <!-- end row -->
-      <input value="SEND" type="button" id="send">
+      <input value="SEND" type="submit"  form="send_me" id="send">
       <span id="allMetaDataSpan"></span>
   </main>
 

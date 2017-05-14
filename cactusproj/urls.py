@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^accounts/', include('cactusproj.accounts.urls', namespace='accounts')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^chat/', include('cactusproj.chat.urls', namespace='chat')),
+    url(r'^api/accounts/', include('cactusproj.accounts.api.urls', namespace='account-api')),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

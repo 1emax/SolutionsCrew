@@ -13,6 +13,7 @@ from imagekit.models import ProcessedImageField, ImageSpecField
 from django_countries.fields import CountryField
 
 from cactusproj.utils.model_utils import UploadToPathAndRename
+from cactusproj.core.models import Problem
 
 
 class Profile(models.Model):
@@ -31,6 +32,7 @@ class Profile(models.Model):
     postal = models.CharField(_("postal"), max_length=200, blank=True, null=True)
     dob = models.DateField(null=True, blank=True, verbose_name=_('birthday'))
     points = models.IntegerField(default=0)
+    level = models.PositiveIntegerField(default=0)
     phone = models.CharField(
         max_length=50,
         verbose_name=_("phone"),
@@ -55,6 +57,7 @@ class Profile(models.Model):
                                             Adjust(sharpness=1.1, contrast=1.1)],
                                         format='JPEG',
                                         options={'quality': 90}, null=True, blank=True)
+    liked_problems = models.ManyToManyField(Problem, through='LikedProblem')
 
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
@@ -75,6 +78,9 @@ class Profile(models.Model):
         else:
             return '<img src="{0}accounts/default/default-avatar.jpg" width="100" height="100" />'.format(settings.STATIC_URL)
     admin_image_thumb.allow_tags = True
+
+    def show_liked_problems(self):
+        return self.liked_problems.all()
 
     # small thumbnail and method for it
     profile_image_thumbnail_sm = ImageSpecField(
@@ -127,3 +133,13 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+class LikedProblem(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ['profile', 'problem']

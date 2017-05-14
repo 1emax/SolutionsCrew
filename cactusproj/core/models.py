@@ -22,7 +22,7 @@ class Problem(models.Model):
         (0, _('passive')),
         (None, _('unknown'))
     )
-    name = models.CharField(max_length=256, blank=False, null=False)
+    name = models.CharField(max_length=256, blank=False, null=False, default='some_name')
     image = ProcessedImageField(
         upload_to=UploadToPathAndRename('problem_images'),
         processors=[
@@ -42,12 +42,13 @@ class Problem(models.Model):
         null=False,
         help_text=_('field for storing photo location')
     )
-    upload_date = models.DateTimeField(help_text=_('date when photo was made/uploaded'))
+    upload_date = models.DateTimeField(auto_now_add=True, help_text=_('date when photo was made/uploaded'))
     status = models.IntegerField(
         choices=STATUS_CHOICES,
         blank=True, null=True,
         help_text=_('state in which our problem is currently')
     )
+    # points = models.PositiveIntegerField(default=0)
 
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
