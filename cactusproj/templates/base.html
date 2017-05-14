@@ -60,6 +60,11 @@
                     <li class="{% if request.resolver_match.namespace == 'accounts' %}active{% endif %}">
                         <a href="{{ request.user.profile.get_absolute_url }}"><i class="fa fa-user "></i> <span class="nav-label">{% trans 'Account' %}</span></a>
                     </li>
+
+                    <li class="{% if request.resolver_match.view_name == 'landing:feed_page' %}active{% endif %}">
+                        <a href="{% url 'landing:feed_page' %}"><i class="fa fa-rss"></i> <span class="nav-label">{% trans 'Feed' %}</span> </a>
+                    </li>
+
                 </ul>
             </div>
         </nav>

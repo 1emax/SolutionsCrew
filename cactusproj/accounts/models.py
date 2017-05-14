@@ -57,6 +57,14 @@ class Profile(models.Model):
                                             Adjust(sharpness=1.1, contrast=1.1)],
                                         format='JPEG',
                                         options={'quality': 90}, null=True, blank=True)
+
+    image_xs = ImageSpecField(
+        source='profile_image',
+        processors=[ResizeToFill(32, 32)],
+        format='JPEG',
+        options={'quality': 80}
+    )
+
     liked_problems = models.ManyToManyField(Problem, through='LikedProblem')
 
     created_date = models.DateTimeField(auto_now_add=True)

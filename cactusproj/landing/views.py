@@ -1,6 +1,6 @@
+import math
 from django.contrib import messages
 from django.views.generic import TemplateView
-import math
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from django.utils.translation import ugettext as _
@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse_lazy
 
 from braces.views import LoginRequiredMixin
 
+from cactusproj.accounts.models import Profile
 from cactusproj.core.models import Problem
 from .forms import ProblemCreateForm
 
@@ -43,3 +44,12 @@ class MapPageView(LoginRequiredMixin, TemplateView):
 class ProblemDetailView(LoginRequiredMixin, DetailView):
     model = Problem
     template_name = 'landing/problem_detail.html'
+
+
+class FeedPageView(LoginRequiredMixin, TemplateView):
+    template_name = 'landing/feed_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(FeedPageView, self).get_context_data(**kwargs)
+        context['profiles'] = Profile.objects.order_by('-points')
+        return context

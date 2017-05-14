@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %} 
+
+
+{% block head_extra_css %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe2qGs5M6DiIFZY4f6yIlxy8kVHwGfTHA"></script>    
+<!-- form Uploads -->
+<link href="{% static 'style.css' %}" rel="stylesheet">
+{% endblock head_extra_css %}
+
+
+{% block body %}
+<style type="text/css">
+      .item div{
+          vertical-align: top;
+    /* height: 50px; */
+    margin-top: 15px;
+    display: inline-block
+    color:435966;
+      }
+      
+      .item div span {
+        color :#3E7493;
+      }
+      .item div:nth-child(2){
+        with: 250px;   
+    }
+            .item div a{
+                color: ;
+            }
+      
+      
+</style>
+<div class="row m-b-lg">
+        <div class="items-div">
+            <h2>Profiles list</h2>
+            <div class="list">
+                {% for profile in profiles %}
+                <div class="item">
+                    <img src="{{ profile.image_xs.url }}" style="border-radius: 50%;margin-bottom: 47px;">
+                    <div style="width:350px; text-align:left;margin-left:20px">
+                       login: <span> <a href="{{ profile.get_absolute_url }}">{{ profile.user.username}}</a></span>
+                    </div>
+                    <div>
+                        date:<span> {{ profile.created_date|naturalday }}</span>
+                    </div>
+                    <div style="vertical-align:top;">
+                        points: <span> {{ profile.points }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+</div>
+{% endblock body %}
+
+
+
+{% block extra_script_base %}
+<script src="{% static 'show.js' %}"></script>
+{% endblock extra_script_base %}
